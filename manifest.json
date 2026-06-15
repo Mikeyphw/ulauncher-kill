@@ -1,15 +1,27 @@
 {
-    "required_api_version": "^2.0.0",
-    "name": "Process Killer",
-    "description": "This can kill user processes",
-    "developer_name": "Aleksandr Gornostal",
-    "icon": "images/kill.png",
-    "preferences": [
+  "name": "CC Kill Pro",
+  "description": "Safe process killer with elevation support",
+  "developer_name": "Code Copilot",
+  "icon": "images/icon.png",
+  "keyword": "kill",
+  "preferences": [
+    {
+      "id": "elevated_method",
+      "name": "elevated_method",
+      "type": "select",
+      "label": "Elevation method",
+      "default_value": "pkexec",
+      "options": [
         {
-            "id": "pkiller_kw",
-            "type": "keyword",
-            "name": "Process Killer",
-            "default_value": "kill"
+          "text": "pkexec (recommended)",
+          "value": "pkexec"
+        },
+        {
+          "text": "sudo -A fallback",
+          "value": "sudo"
         }
-    ]
+      ]
+    }
+  ],
+  "main": "main.py"
 }
