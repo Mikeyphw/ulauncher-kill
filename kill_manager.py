@@ -1,10 +1,5 @@
-import sys,psutil,subprocess,os
 
-def is_root(pid):
-    try:
-        return psutil.Process(pid).username()=="root"
-    except:
-        return False
+import sys,psutil,subprocess
 
 def run_e(cmd):
     try:
@@ -12,12 +7,23 @@ def run_e(cmd):
     except:
         return subprocess.run(["sudo","-A"]+cmd,check=True)
 
-def kill(pid):
-    cmd=["kill","-15",str(pid)]
-    if is_root(pid):
-        return run_e(cmd)
-    return subprocess.run(cmd)
+def kill_tree(pid,force=False):
+    try:
+        p=psutil.Process(pid)
+        children=p.children(recursive=True)
+
+        for c in children:
+            kill_single(c.pid,force)
+
+        kill_single(pid,force)
+    except:
+        pass
+
+def kill_single(pid,force):
+    sig="-9" if force else "-15"
+    cmd=["kill",sig,str(pid)]
+    run_e(cmd)
 
 if __name__=="__main__":
     pid=int(sys.argv[1])
-    kill(pid)
+    kill_tree(pid,force=False)

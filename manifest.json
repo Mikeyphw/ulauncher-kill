@@ -1,6 +1,7 @@
 {
-  "name": "CC Kill Pro",
-  "description": "Safe process killer with elevation support",
+  "required_api_version": "2",
+  "name": "CC Kill Pro v2",
+  "description": "Process killer with fuzzy search, watch mode, and tree kill",
   "developer_name": "Code Copilot",
   "icon": "images/icon.png",
   "keyword": "kill",
@@ -13,11 +14,11 @@
       "default_value": "pkexec",
       "options": [
         {
-          "text": "pkexec (recommended)",
+          "text": "pkexec",
           "value": "pkexec"
         },
         {
-          "text": "sudo -A fallback",
+          "text": "sudo -A",
           "value": "sudo"
         }
       ]
